@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <include layout="@layout/layout_title" />
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_change_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_avatar"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="修改用户名" />
+
+        <TextView
+            android:id="@+id/tv_change_carmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_change_username"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="修改车辆信息" />
+
+        <TextView
+            android:id="@+id/tv_change_adress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_change_carmsg"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="修改收货地址" />
+
+        <TextView
+            android:id="@+id/tv_change_pswd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_change_adress"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="修改密码" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_change_pswd"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingBottom="20dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="联系我们" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_contact"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:text="退出登录" />
+</RelativeLayout>
