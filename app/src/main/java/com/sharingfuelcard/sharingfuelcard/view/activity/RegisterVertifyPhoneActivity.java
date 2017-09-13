@@ -43,6 +43,7 @@ public class RegisterVertifyPhoneActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         setTitle("注册");
+        showBack();
     }
 
     @Override

@@ -2,30 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+
     <include layout="@layout/layout_title" />
+
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="80dp"
+        android:src="@mipmap/icon_camera" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_avatar"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginTop="50dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="设置用户名" />
+            android:drawableLeft="@mipmap/icon_username"
+            android:drawablePadding="5dp"
+            android:hint="用户名"
+            android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -33,15 +39,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/til_username"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="57dp"
         android:layout_marginTop="10dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edt_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="性别" />
+            android:drawableLeft="@mipmap/icon_gender"
+            android:drawablePadding="5dp"
+            android:hint="性别"
+            android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -49,15 +58,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/til_gender"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="57dp"
         android:layout_marginTop="10dp">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edt_car_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="选填：车辆牌子和型号" />
+            android:drawableLeft="@mipmap/icon_car_type"
+            android:drawablePadding="5dp"
+            android:hint="车辆牌子和型号（选填）"
+            android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
@@ -65,17 +77,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/til_car_msg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="24dp"
         android:text="阅读同意协议" />
 
     <Button
         android:id="@+id/btn_register"
+        style="@style/StyleBtnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cb_confirm"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="57dp"
         android:layout_marginTop="10dp"
-        android:text="注册" />
+        android:text="注册"
+        android:textColor="@color/white" />
 </RelativeLayout>

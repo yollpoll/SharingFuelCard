@@ -34,7 +34,8 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-        setTitle("注册");
+        showBack();
+        setTitle("基本信息");
     }
 
 }

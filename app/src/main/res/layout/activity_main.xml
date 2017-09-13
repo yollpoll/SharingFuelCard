@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sharingfuelcard.sharingfuelcard.view.activity.MainActivity">
-    <include layout="@layout/layout_title" />
-    <Button
-        android:id="@+id/btn_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:visibility="gone"
-        android:text="设置" />
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_register_fuel_card"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        android:visibility="gone"
-        android:text="添加油卡" />
+        android:background="@mipmap/icon_main_bg">
 
-    <TextView
-        android:id="@+id/tv_balance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="共享油卡余额:1100000" />
 
-    <TextView
-        android:id="@+id/tv_month_sharing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tv_balance"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="每月共享金额" />
+        <include layout="@layout/layout_title" />
 
-    <TextView
-        android:id="@+id/tv_month_times"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_balance"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="已共享月份" />
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="设置"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_register_fuel_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:text="添加油卡"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="共享油卡余额:1100000" />
+
+        <TextView
+            android:id="@+id/tv_month_sharing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_balance"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="每月共享金额" />
+
+        <TextView
+            android:id="@+id/tv_month_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_balance"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="已共享月份" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_month_times"
+        android:layout_below="@+id/rl_top"
         android:layout_marginTop="20dp" />
 
     <Button

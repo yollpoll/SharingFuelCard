@@ -17,4 +17,8 @@
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
+
+    <style name="StyleBtnLogin">
+        <item name="android:background">@drawable/ripple_btn_login</item>
+    </style>
 </resources>
