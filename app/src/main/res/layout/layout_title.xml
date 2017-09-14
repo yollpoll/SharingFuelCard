@@ -10,9 +10,9 @@
         android:layout_width="?android:attr/actionBarSize"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:visibility="gone"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="20dp" />
+        android:padding="18dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_head_left"
@@ -22,7 +22,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:padding="10dp"
-        android:textColor="@color/colorTextAccent"
+        android:textColor="@color/black"
         android:visibility="gone" />
 
     <TextView
@@ -38,9 +38,9 @@
         android:layout_width="?android:attr/actionBarSize"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="5dp" />
+        android:padding="18dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_head_right"
@@ -50,6 +50,6 @@
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:padding="10dp"
-        android:visibility="gone"
-        android:textColor="@color/colorTextAccent" />
+        android:textColor="@color/black"
+        android:visibility="gone" />
 </RelativeLayout>

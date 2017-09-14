@@ -6,9 +6,12 @@
     <color name="white">#ffffff</color>
     <color name="colorAccent">#F57A23</color>
     <color name="colorTextAccent">#ffffff</color>
-    <color name="colorLine">#818181</color>
-    <color name="colorHint">#C1C1C1</color>
+    <color name="colorLine">#eeeeee</color>
+    <color name="colorHint">#aeaeae</color>
     <color name="colorBtnLogin">#F6B688</color>
     <color name="colorText">#9B9B9B</color>
+    <color name="colorTextGray">#aeaeae</color>
     <color name="black">#000000</color>
+    <color name="whiteMask">#1eFFFFFF</color>
+    <color name="recommendPlan">#4a4a4a</color>
 </resources>

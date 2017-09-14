@@ -19,10 +19,11 @@ import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 
 public class MainActivity extends BaseActivity {
-    private Button btnSetting, btnRegisterFuelCard, btnMore;
-    private TextView tvBalance, tvMonthTimes, tvMonthSharing;
+    private Button btnSetting, btnRegisterFuelCard;
+    private TextView tvBalance, tvMonthTimes, tvMonthSharing, tvTitle, tvMoreChoice, tvHeadLeft;
     private RecyclerView rvPlan;
     private RelativeLayout rlTitle;
+
 
     public static void gotoMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -40,18 +41,20 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        tvMoreChoice = (TextView) findViewById(R.id.tv_more_choice);
+        tvtitle = (TextView) findViewById(R.id.tv_title);
         rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
         btnSetting = (Button) findViewById(R.id.btn_setting);
         btnRegisterFuelCard = (Button) findViewById(R.id.btn_register_fuel_card);
-        btnMore = (Button) findViewById(R.id.btn_more);
         tvBalance = (TextView) findViewById(R.id.tv_balance);
         tvMonthSharing = (TextView) findViewById(R.id.tv_month_sharing);
         tvMonthTimes = (TextView) findViewById(R.id.tv_month_times);
         rvPlan = (RecyclerView) findViewById(R.id.rv_plan);
+        tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
 
+        tvMoreChoice.setOnClickListener(this);
         btnSetting.setOnClickListener(this);
         btnRegisterFuelCard.setOnClickListener(this);
-        btnMore.setOnClickListener(this);
 
     }
 
@@ -59,8 +62,10 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         setToolBarColor(Color.parseColor("#00000000"));
         setHeadLeftText("设置");
-        setHeadRightText("添加油卡");
-        setTitle("主页");
+        setHeadRightImg(R.mipmap.icon_add_card);
+        setTitle("首页");
+        tvtitle.setTextColor(getResources().getColor(R.color.white));
+        tvHeadLeft.setTextColor(getResources().getColor(R.color.white));
         ImmersionBar.with(this).fullScreen(true).init();
         int height = ImmersionBar.with(this).getStatusBarHeight(this);
         Utils.setMargins(rlTitle, 0, height, 0, 0);
@@ -72,9 +77,10 @@ public class MainActivity extends BaseActivity {
         SettingActivity.gotoSettingActivity(getContext());
     }
 
+
     @Override
-    protected void onRightTVClick() {
-        super.onRightTVClick();
+    protected void onRightIVClick() {
+        super.onRightIVClick();
         RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
     }
 
@@ -82,13 +88,7 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.btn_setting:
-                SettingActivity.gotoSettingActivity(getContext());
-                break;
-            case R.id.btn_register_fuel_card:
-                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
-                break;
-            case R.id.btn_more:
+            case R.id.tv_more_choice:
                 break;
         }
     }

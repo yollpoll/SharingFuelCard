@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
@@ -17,7 +18,7 @@ import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 
 public class RegisterFuelCardActivity extends BaseActivity {
     private ImageView ivCNPC, ivSinopec;
-    private Button btnSkip, btnApplyCard;
+    private RelativeLayout rlApplyFuelCard;
 
     public static void gotoApplyFurlCardActivity(Context context) {
         Intent intent = new Intent(context, RegisterFuelCardActivity.class);
@@ -35,22 +36,20 @@ public class RegisterFuelCardActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        rlApplyFuelCard = (RelativeLayout) findViewById(R.id.rl_apply_fuel_card);
         ivCNPC = (ImageView) findViewById(R.id.iv_CNPC);
         ivSinopec = (ImageView) findViewById(R.id.iv_Sinopec);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnApplyCard = (Button) findViewById(R.id.btn_apply);
 
         ivSinopec.setOnClickListener(this);
         ivCNPC.setOnClickListener(this);
-        btnSkip.setOnClickListener(this);
-        btnApplyCard.setOnClickListener(this);
+        rlApplyFuelCard.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
         super.initData();
-        setTitle("申请油卡");
         setHeadRightText("跳过");
+        showBack();
     }
 
     @Override
@@ -64,15 +63,12 @@ public class RegisterFuelCardActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.iv_CNPC:
-                BindFuelActivity.gotoBindFuelActivity(getContext());
+                BindFuelActivity.gotoBindFuelActivityByCNPC(getContext());
                 break;
             case R.id.iv_Sinopec:
-                BindFuelActivity.gotoBindFuelActivity(getContext());
+                BindFuelActivity.gotoBindFuelActivityBySinopec(getContext());
                 break;
-            case R.id.btn_skip:
-                MainActivity.gotoMainActivity(getContext());
-                break;
-            case R.id.btn_apply:
+            case R.id.rl_apply_fuel_card:
                 ApplyFuelCardActivity.gotoApplyFurlCard(getContext());
                 break;
         }

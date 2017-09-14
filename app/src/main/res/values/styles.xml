@@ -12,4 +12,13 @@
     <style name="StyleBtnLogin">
         <item name="android:background">@drawable/selector_btn_login</item>
     </style>
+
+    <style name="StyleApplyFuelCard">
+        <item name="android:background">@drawable/selector_apply_fuel_card</item>
+    </style>
+
+    <style name="StyleWhiteRipple"></style>
+    <style name="StyleAddPhoto">
+        <item name="android:background">#eeeeee</item>
+    </style>
 </resources>

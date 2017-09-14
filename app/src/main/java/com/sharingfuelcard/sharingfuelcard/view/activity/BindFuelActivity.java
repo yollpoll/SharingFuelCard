@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
@@ -15,10 +16,30 @@ import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
  */
 
 public class BindFuelActivity extends BaseActivity {
+    public static final int TYPE_CNPC = 1;
+    public static final int TYPE_SINOPEC = 2;
+    public static final int TYPE_OTHERS = 3;
     private Button btnSubmit;
+    private int cardType;
+    private String imgUrl;
+    private ImageView ivCard;
 
-    public static void gotoBindFuelActivity(Context context) {
+    public static void gotoBindFuelActivityByCNPC(Context context) {
         Intent intent = new Intent(context, BindFuelActivity.class);
+        intent.putExtra("type", TYPE_CNPC);
+        context.startActivity(intent);
+    }
+
+    public static void gotoBindFuelActivityBySinopec(Context context) {
+        Intent intent = new Intent(context, BindFuelActivity.class);
+        intent.putExtra("type", TYPE_SINOPEC);
+        context.startActivity(intent);
+    }
+
+    public static void gotoBindFuelActivityByOthers(Context context, String imgUrl) {
+        Intent intent = new Intent(context, BindFuelActivity.class);
+        intent.putExtra("type", TYPE_OTHERS);
+        intent.putExtra("imgUrl", imgUrl);
         context.startActivity(intent);
     }
 
@@ -34,15 +55,38 @@ public class BindFuelActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         btnSubmit = (Button) findViewById(R.id.btn_submit);
-
+        ivCard = (ImageView) findViewById(R.id.iv_furl_card);
         btnSubmit.setOnClickListener(this);
+
     }
 
     @Override
     protected void initData() {
         super.initData();
-        setTitle("添加油卡");
+        cardType = getIntent().getIntExtra("type", 3);
+        switch (cardType) {
+            case TYPE_CNPC:
+                ivCard.setImageResource(R.mipmap.icon_cnpc);
+                break;
+            case TYPE_SINOPEC:
+                ivCard.setImageResource(R.mipmap.icon_sinopec);
+                break;
+            case TYPE_OTHERS:
+                //TODO glide
+                imgUrl = getIntent().getStringExtra("imgUrl");
+                break;
+        }
+        showBack();
+        setHeadRightText("跳过");
+        setTitle("登陆油卡");
     }
+
+    @Override
+    protected void onRightTVClick() {
+        super.onRightTVClick();
+        MainActivity.gotoMainActivity(this);
+    }
+
 
     @Override
     public void onClick(View v) {

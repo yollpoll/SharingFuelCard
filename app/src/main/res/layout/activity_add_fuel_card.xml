@@ -2,50 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include
         android:id="@+id/include"
         layout="@layout/layout_title" />
 
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/include"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="10dp"
-        android:text="跳过"
-        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/iv_CNPC"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        style="@style/StyleWhiteRipple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/include"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/colorAccent" />
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/icon_cnpc"
+        android:stateListAnimator="@drawable/coupon_animator" />
 
     <ImageView
         android:id="@+id/iv_Sinopec"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/iv_CNPC"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorAccent" />
-
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="match_parent"
+        style="@style/StyleWhiteRipple"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_CNPC"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/icon_sinopec"
+        android:stateListAnimator="@drawable/coupon_animator" />
+
+    <RelativeLayout
+        android:id="@+id/rl_apply_fuel_card"
+        style="@style/StyleApplyFuelCard"
+        android:layout_width="327dp"
+        android:layout_height="130dp"
         android:layout_below="@+id/iv_Sinopec"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:text="我没有油卡，申请油卡" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:stateListAnimator="@drawable/selector_login_btn">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/icon_add_fuel_card"
+            android:gravity="center"
+            android:text="我没有油卡,申请油卡" />
+
+    </RelativeLayout>
+
 </RelativeLayout>
