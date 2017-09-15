@@ -6,12 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.sharingfuelcard.sharingfuelcard.BuildConfig;
 import com.sharingfuelcard.sharingfuelcard.R;
 
 import java.io.File;
@@ -33,7 +35,7 @@ public class Utils {
     public static final int PIC_FROM_PHOTO = 11;
     public static final int PIC_FROM_CAMERA = 12;
     public static final int CROP_PHOTO = 13;
-    public static Uri imgUri;
+    public static Uri imgUri, filrUri;//一个是from provider,一个是from file
 
     public static void showChoosePicDialog(final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -58,7 +60,9 @@ public class Utils {
                 }
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imgUri = Uri.fromFile(imgFile);
+                imgUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileProvider",
+                        imgFile);
+                filrUri = Uri.fromFile(imgFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                 activity.startActivityForResult(intent, PIC_FROM_CAMERA);
 
@@ -73,7 +77,8 @@ public class Utils {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 activity.startActivityForResult(intent, PIC_FROM_PHOTO);
             }
-        });}
+        });
+    }
 
     public static Bitmap compressBitmap(String path, int destWidth, int destHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();

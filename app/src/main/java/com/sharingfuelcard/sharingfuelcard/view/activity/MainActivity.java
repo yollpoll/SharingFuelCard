@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.tv_more_choice:
+                MoreChoiceActivity.gotoMoreChoiceActivity(this);
                 break;
         }
     }

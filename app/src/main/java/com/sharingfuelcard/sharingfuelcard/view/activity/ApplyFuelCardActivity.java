@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,17 +65,30 @@ public class ApplyFuelCardActivity extends BaseActivity {
                     ToastUtils.showShort("拍照失败");
                     break;
                 }
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(Utils.imgUri, "image/*");
-                intent.putExtra("scale", true);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Utils.imgUri);
-                ApplyFuelCardActivity.this.startActivityForResult(intent, Utils.CROP_PHOTO);
+                path = FileUtils.getPathByUri(Utils.filrUri, this);
+                bitmap = Utils.compressBitmap(path, 1024, 1024);
+                ivPhoto1.setImageBitmap(bitmap);
+//                Uri imageUri, outputUri;
+//                Intent intent = new Intent("com.android.camera.action.CROP");
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    //添加这一句表示对目标应用临时授权该Uri所代表的文件
+//                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                    imageUri = Utils.imgUri;
+//                    outputUri = Utils.filrUri;
+//                } else {
+//                    imageUri = Utils.filrUri;
+//                    outputUri = Utils.filrUri;
+//                }
+//                intent.setDataAndType(imageUri, "image/*");
+//                intent.putExtra("scale", true);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+//                ApplyFuelCardActivity.this.startActivityForResult(intent, Utils.CROP_PHOTO);
                 break;
             case Utils.CROP_PHOTO:
                 if (resultCode != RESULT_OK) {
-                    ToastUtils.showShort("剪裁失败");
                     break;
                 }
+
                 path = FileUtils.getPathByUri(Utils.imgUri, this);
                 bitmap = Utils.compressBitmap(path, 1024, 1024);
 //                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Tools.imgUri));
