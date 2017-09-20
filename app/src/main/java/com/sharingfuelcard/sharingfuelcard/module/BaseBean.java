@@ -5,6 +5,4 @@ package com.sharingfuelcard.sharingfuelcard.module;
  */
 
 public class BaseBean {
-    public boolean ifTure;
-    public String message;
 }

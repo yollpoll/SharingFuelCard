@@ -7,5 +7,6 @@ package com.sharingfuelcard.sharingfuelcard.http;
 public class Url {
     public final static String HEAD_URL = "http://47.95.246.251:8080/ya-oilcard/";
     public final static String REGISTER = HEAD_URL + "user/addUser";
+    public final static String LOGIN = HEAD_URL + "user/login";
 
 }

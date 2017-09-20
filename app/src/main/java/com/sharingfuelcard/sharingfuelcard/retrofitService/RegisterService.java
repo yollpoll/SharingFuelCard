@@ -1,5 +1,6 @@
 package com.sharingfuelcard.sharingfuelcard.retrofitService;
 
+import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.http.Url;
 import com.sharingfuelcard.sharingfuelcard.module.RegisterBean;
 
@@ -17,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface RegisterService {
     @GET(Url.REGISTER)
-    Call<RegisterBean> register(@Query("tel") String tel, @Query("password") String password, @Query("name") String name,
-                                @Query("sex") String gender, @Query("code") String code, @Query("license_plate") String license_plate,
-                                @Query("car_models") String car_model);
+    Call<ResponseData<RegisterBean>> register(@Query("tel") String tel, @Query("password") String password, @Query("name") String name,
+                                              @Query("sex") String gender, @Query("code") String code, @Query("license_plate") String license_plate,
+                                              @Query("car_models") String car_model);
 }

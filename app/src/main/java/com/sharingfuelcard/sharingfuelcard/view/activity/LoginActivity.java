@@ -15,6 +15,15 @@ import android.widget.TextView;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
+import com.sharingfuelcard.sharingfuelcard.http.Httptools;
+import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
+import com.sharingfuelcard.sharingfuelcard.module.LoginBean;
+import com.sharingfuelcard.sharingfuelcard.retrofitService.LoginService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by 鹏祺 on 2017/9/6.
@@ -26,6 +35,10 @@ public class LoginActivity extends BaseActivity {
     private TextView tvForgetPswd, tvRegister, tvLoginViaWechat;
     private Button btnLogin;
     private boolean isPhoneClear = true, isPswdClear = true;
+    private Retrofit retrofit;
+    private LoginService loginService;
+    private long phone;
+    private String password;
 
 
     public static void gotoLoginActivity(Context context) {
@@ -107,6 +120,31 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    private boolean check() {
+        phone = Long.parseLong(edtPhone.getText().toString());
+        password = edtPassword.getText().toString();
+        return true;
+    }
+
+    private void login() {
+        retrofit = Httptools.getInstance().getRetrofit();
+        loginService = retrofit.create(LoginService.class);
+        Call<ResponseData<LoginBean>> call = loginService.login(phone, password);
+        call.enqueue(new Callback<ResponseData<LoginBean>>() {
+            @Override
+            public void onResponse(Call<ResponseData<LoginBean>> call, Response<ResponseData<LoginBean>> response) {
+//                Log.d("spq", response.body().getData().getToken());
+                LoginActivity.this.finish();
+                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData<LoginBean>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -115,8 +153,10 @@ public class LoginActivity extends BaseActivity {
                 RegisterVertifyPhoneActivity.gotoRegisterVertifyPhoneActivity(getContext());
                 break;
             case R.id.btn_login:
-                LoginActivity.this.finish();
-                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
+                if (check())
+                    login();
+//                LoginActivity.this.finish();
+//                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
                 break;
             case R.id.tv_login_via_wechat:
                 break;

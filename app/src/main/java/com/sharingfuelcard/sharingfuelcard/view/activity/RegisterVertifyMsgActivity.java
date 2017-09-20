@@ -6,14 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 import com.sharingfuelcard.sharingfuelcard.http.Httptools;
+import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.module.RegisterBean;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.RegisterService;
 import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
@@ -36,6 +39,7 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
     private String username, gender, carCode = "", carMsg = "";
     private Retrofit retrofit;
     private RegisterService registerService;
+    private AppCompatCheckBox cbConfirm;
 
 
     public static void gotoRegisterVertifiyMsgActivity(Context context, String phone, String password, String vertifyCode) {
@@ -62,6 +66,7 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
         edtGender = (TextInputEditText) findViewById(R.id.edt_gender);
         edtCarCode = (TextInputEditText) findViewById(R.id.edt_car_code);
         edtCarMsg = (TextInputEditText) findViewById(R.id.edt_car_msg);
+        cbConfirm = (AppCompatCheckBox) findViewById(R.id.cb_confirm);
         btnRegister.setOnClickListener(this);
     }
 
@@ -88,16 +93,17 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
     }
 
     private void register() {
-        Call<RegisterBean> callRegister = registerService.register(phone, password, username, gender, vertifyCode,
+        Call<ResponseData<RegisterBean>> callRegister = registerService.register(phone, password, username, gender, vertifyCode,
                 carCode, carMsg);
-        callRegister.enqueue(new Callback<RegisterBean>() {
+        callRegister.enqueue(new Callback<ResponseData<RegisterBean>>() {
             @Override
-            public void onResponse(Call<RegisterBean> call, Response<RegisterBean> response) {
-                Log.d("spq", response.body().message);
+            public void onResponse(Call<ResponseData<RegisterBean>> call, Response<ResponseData<RegisterBean>> response) {
+                ToastUtils.showShort(response.body().getMessage());
+                RegisterVertifyMsgActivity.this.finish();
             }
 
             @Override
-            public void onFailure(Call<RegisterBean> call, Throwable t) {
+            public void onFailure(Call<ResponseData<RegisterBean>> call, Throwable t) {
                 ToastUtils.showShort(t.getMessage());
             }
         });
@@ -126,6 +132,13 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
 
         retrofit = Httptools.getInstance().getRetrofit();
         registerService = retrofit.create(RegisterService.class);
+        btnRegister.setEnabled(false);
+        cbConfirm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                btnRegister.setEnabled(isChecked);
+            }
+        });
     }
 
 }
