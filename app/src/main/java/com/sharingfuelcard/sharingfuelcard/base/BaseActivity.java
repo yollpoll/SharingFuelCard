@@ -86,7 +86,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
 
     protected void setToolBarColor(int color) {
-        rlTitle.setBackgroundColor(color);
+            rlTitle.setBackgroundColor(color);
     }
 
     protected void onLeftTVClick() {

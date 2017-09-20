@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,11 +22,11 @@ import com.sharingfuelcard.sharingfuelcard.utils.Utils;
  */
 
 public class SettingActivity extends BaseActivity {
-    private TextView tvChangeUsername, tvChangeCarMsg, tvChangeAdress, tvChangePswd,
+    private TextView tvMyFuelCard, tvCurrentPlan, tvHistoryRecharge, tvChangePswd, tvChangeAdress,
             tvContact, tvTitle;
     private Button btnLogout;
-    private ImageView ivAvatar;
     private RelativeLayout rlTitle;
+    private ImageView ivAvatar;
 
     public static void gotoSettingActivity(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
@@ -43,18 +44,20 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        tvChangeUsername = (TextView) findViewById(R.id.tv_change_username);
-        tvChangeCarMsg = (TextView) findViewById(R.id.tv_change_carmsg);
+        rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
+        tvMyFuelCard = (TextView) findViewById(R.id.tv_my_fuel_card);
+        tvCurrentPlan = (TextView) findViewById(R.id.tv_current_plan);
         tvChangeAdress = (TextView) findViewById(R.id.tv_change_adress);
-        tvChangePswd = (TextView) findViewById(R.id.tv_change_pswd);
+        tvHistoryRecharge = (TextView) findViewById(R.id.tv_history_recharge);
+        tvChangePswd = (TextView) findViewById(R.id.tv_change_password);
         tvContact = (TextView) findViewById(R.id.tv_contact);
         btnLogout = (Button) findViewById(R.id.btn_logout);
         ivAvatar = (ImageView) findViewById(R.id.iv_avatar);
         tvtitle = (TextView) findViewById(R.id.tv_title);
-        rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
 
-        tvChangeUsername.setOnClickListener(this);
-        tvChangeCarMsg.setOnClickListener(this);
+        tvMyFuelCard.setOnClickListener(this);
+        tvCurrentPlan.setOnClickListener(this);
+        tvHistoryRecharge.setOnClickListener(this);
         tvChangeAdress.setOnClickListener(this);
         tvChangePswd.setOnClickListener(this);
         tvContact.setOnClickListener(this);
@@ -77,5 +80,21 @@ public class SettingActivity extends BaseActivity {
     protected void onLeftIVClick() {
         super.onLeftIVClick();
         this.finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.tv_my_fuel_card:
+                MyFeulCardActivity.gotoMyFuelCardActivity(this);
+                break;
+            case R.id.tv_history_recharge:
+                RechargeHistoryActivity.gotoRechargeHistoryActivity(this);
+                break;
+            case R.id.tv_current_plan:
+                CurrentChoiceActivity.gotoCurrentChoiceActivity(this);
+                break;
+        }
     }
 }

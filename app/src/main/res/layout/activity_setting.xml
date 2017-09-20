@@ -7,83 +7,195 @@
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="147dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@mipmap/icon_main_bg">
 
         <include layout="@layout/layout_title" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_title"
+            >
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="24dp" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:layout_toRightOf="@+id/iv_avatar"
+                android:text="用户名"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_username"
+                android:src="@mipmap/icon_edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_card_number"
+                android:paddingBottom="7dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="12dp"
+                android:paddingTop="7dp"
+                android:text="苏E77AE3"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_avatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        />
 
-    <TextView
-        android:id="@+id/tv_change_username"
+    <LinearLayout
+        android:id="@+id/ll_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_avatar"
-        android:layout_marginTop="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:text="修改用户名" />
+        android:layout_below="@+id/rl_top"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_change_carmsg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_change_username"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:text="修改车辆信息" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
 
-    <TextView
-        android:id="@+id/tv_change_adress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_change_carmsg"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:text="修改收货地址" />
+        <TextView
+            android:id="@+id/tv_my_fuel_card"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/rl_top"
+            android:drawableLeft="@mipmap/icon_my_fuel_card"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="我的油卡" />
 
-    <TextView
-        android:id="@+id/tv_change_pswd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_change_adress"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:text="修改密码" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
 
-    <TextView
-        android:id="@+id/tv_contact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_change_pswd"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingBottom="20dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="20dp"
-        android:text="联系我们" />
+        <TextView
+            android:id="@+id/tv_current_plan"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tv_my_fuel_card"
+            android:drawableLeft="@mipmap/icon_current_plan"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="当前套餐" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+
+        <TextView
+            android:id="@+id/tv_history_recharge"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tv_current_plan"
+            android:drawableLeft="@mipmap/icon_history_recharge"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="历史充值记录" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorLine" />
+
+        <TextView
+            android:id="@+id/tv_change_adress"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tv_history_recharge"
+            android:drawableLeft="@mipmap/icon_change_adress"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="修改收货地址" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+
+        <TextView
+            android:id="@+id/tv_change_password"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tv_change_adress"
+            android:drawableLeft="@mipmap/icon_password"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="修改密码" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            style="@style/StyleWhiteBgRipple"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/tv_change_password"
+            android:drawableLeft="@mipmap/icon_contract_us"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="联系我们" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_contact"
+        style="@style/StyleBtnLogin"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ll_item"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
-        android:text="退出登录" />
+        android:text="退出登录"
+        android:textColor="@color/white" />
 </RelativeLayout>

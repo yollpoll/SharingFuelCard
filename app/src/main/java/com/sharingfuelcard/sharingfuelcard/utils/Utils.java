@@ -1,6 +1,7 @@
 package com.sharingfuelcard.sharingfuelcard.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -94,5 +95,10 @@ public class Utils {
         options.inSampleSize = inSampleSize;
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         return BitmapFactory.decodeFile(path, options);
+    }
+
+    public static int calculateDpToPx(int padding_in_dp, Context context) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (padding_in_dp * scale + 0.5f);
     }
 }

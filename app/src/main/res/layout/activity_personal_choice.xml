@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="186dp"
+                android:background="@mipmap/icon_main_bg">
+
+                <include layout="@layout/layout_title" />
+
+                <TextView
+                    android:id="@+id/tv_month_money_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="月享加油金"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_month_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_month_money_title"
+                    android:layout_centerHorizontal="true"
+                    android:text="200"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="套餐内容"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="折扣选择"
+                android:textColor="@color/recommendPlan" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_discount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorLine" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorLine" />
+
+            <RelativeLayout
+                android:id="@+id/rl_recharge_detail"
+                style="@style/StyleWhiteBgRipple"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="充值明细"
+                    android:textColor="@color/recommendPlan" />
+
+                <TextView
+                    android:id="@+id/tv_recharge_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:singleLine="true"
+                    android:text="明细............"
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorLine" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="选择支付方式"
+                    android:textColor="@color/recommendPlan" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/colorLine" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp">
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb_wechatpay"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:checked="true"
+                        android:drawableLeft="@mipmap/icon_wechat_pay"
+                        android:drawablePadding="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="微信支付" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/colorLine"
+                        />
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb_alipay"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@mipmap/icon_alipay"
+                        android:drawablePadding="10dp"
+                        android:paddingLeft="10dp"
+                        android:text="支付宝支付" />
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorLine" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancel_bind"
+            style="@style/StyleCancelBind"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="合计:22222元"
+            android:textColor="@color/recommendPlan" />
+
+        <TextView
+            android:id="@+id/tv_buy"
+            style="@style/StyleBuyPlan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="立即购买"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>

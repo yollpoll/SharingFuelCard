@@ -12,7 +12,8 @@
             android:id="@+id/rl_top"
             android:layout_width="match_parent"
             android:layout_height="226dp"
-            android:background="@mipmap/icon_main_bg">
+            android:background="@mipmap/icon_main_bg"
+            >
 
 
             <include layout="@layout/layout_title" />

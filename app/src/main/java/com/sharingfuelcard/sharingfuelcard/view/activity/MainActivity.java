@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
         tvMoreChoice.setOnClickListener(this);
         btnSetting.setOnClickListener(this);
         btnRegisterFuelCard.setOnClickListener(this);
-
+        rvPlan.setOnClickListener(this);
     }
 
     @Override
@@ -89,7 +89,9 @@ public class MainActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.tv_more_choice:
-                MoreChoiceActivity.gotoMoreChoiceActivity(this);
+//                MoreChoiceActivity.gotoMoreChoiceActivity(this);
+//                PersonalChoiceActivity.gotoPersonalChoiceActivity(this);
+                GreatChoiceActivity.gotoGreatChoiceActivity(this);
                 break;
         }
     }

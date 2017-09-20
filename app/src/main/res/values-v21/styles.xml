@@ -33,4 +33,24 @@
     <style name="StyleAddPhoto">
         <item name="android:foreground">@drawable/ripple_add_photo</item>
     </style>
+
+    <style name="StyleWhiteBgRipple">
+        <item name="android:background">@drawable/ripple_item_mine</item>
+    </style>
+
+    <style name="StyleCancelBind">
+        <item name="android:background">@drawable/ripple_cancel_bind_card</item>
+    </style>
+
+    <style name="StyleBuyPlan">
+        <item name="android:background">@drawable/ripple_buy_plan</item>
+    </style>
+
+    <style name="StyleGreatChoiceLeft">
+        <item name="android:background">@drawable/ripple_great_choice_button_left</item>
+    </style>
+
+    <style name="StyleGreatChoiceRight">
+        <item name="android:background">@drawable/ripple_great_choice_right</item>
+    </style>
 </resources>
