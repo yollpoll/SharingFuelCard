@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,10 @@ import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 import com.sharingfuelcard.sharingfuelcard.http.Httptools;
 import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.module.LoginBean;
+import com.sharingfuelcard.sharingfuelcard.module.UserBean;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.LoginService;
+import com.sharingfuelcard.sharingfuelcard.utils.SPUtiles;
+import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,6 +122,9 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+        phone = SPUtiles.getUsername();
+        if (phone != -1)
+            edtPhone.setText(phone + "");
     }
 
     private boolean check() {
@@ -133,14 +140,51 @@ public class LoginActivity extends BaseActivity {
         call.enqueue(new Callback<ResponseData<LoginBean>>() {
             @Override
             public void onResponse(Call<ResponseData<LoginBean>> call, Response<ResponseData<LoginBean>> response) {
-//                Log.d("spq", response.body().getData().getToken());
-                LoginActivity.this.finish();
-                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
+                String token = "";
+                try {
+                    token = response.body().getData().getToken();
+                } catch (Exception e) {
+
+                }
+                if (!TextUtils.isEmpty(token)) {
+                    SPUtiles.saveToken(token);
+                    SPUtiles.saveUsername(phone);
+                    getUser();
+                    LoginActivity.this.finish();
+                    RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
+                } else {
+                    ToastUtils.showShort("登陆失败");
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseData<LoginBean>> call, Throwable t) {
+                Log.d("spq", t.getMessage());
+            }
+        });
+    }
 
+    private void getUser() {
+        Call<ResponseData<UserBean>> call = loginService.getUser(SPUtiles.getToken());
+        call.enqueue(new Callback<ResponseData<UserBean>>() {
+            @Override
+            public void onResponse(Call<ResponseData<UserBean>> call, Response<ResponseData<UserBean>> response) {
+                UserBean userBean;
+                try {
+                    userBean = response.body().getData();
+                } catch (Exception e) {
+                    userBean = null;
+                } finally {
+                }
+                if (null == userBean) {
+                    ToastUtils.showShort("获取用户信息失败");
+                } else {
+                    SPUtiles.saveUser(response.body().getData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData<UserBean>> call, Throwable t) {
             }
         });
     }

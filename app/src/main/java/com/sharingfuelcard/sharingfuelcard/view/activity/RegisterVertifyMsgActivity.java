@@ -1,17 +1,23 @@
 package com.sharingfuelcard.sharingfuelcard.view.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
@@ -19,8 +25,15 @@ import com.sharingfuelcard.sharingfuelcard.http.Httptools;
 import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.module.RegisterBean;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.RegisterService;
+import com.sharingfuelcard.sharingfuelcard.utils.FileUtils;
 import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
+import com.sharingfuelcard.sharingfuelcard.utils.Utils;
+import com.sharingfuelcard.sharingfuelcard.view.weiget.CannotClickChildRl;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +53,9 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
     private Retrofit retrofit;
     private RegisterService registerService;
     private AppCompatCheckBox cbConfirm;
+    private ImageView ivAvatar;
+    private File file;
+    private CannotClickChildRl rlGender;
 
 
     public static void gotoRegisterVertifiyMsgActivity(Context context, String phone, String password, String vertifyCode) {
@@ -48,6 +64,32 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
         intent.putExtra("password", password);
         intent.putExtra("vertifyCode", vertifyCode);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Utils.PIC_FROM_PHOTO:
+                if (resultCode != RESULT_OK) {
+                    ToastUtils.showShort("获取图片失败");
+                    break;
+                }
+                Uri uri = data.getData();
+                String path = FileUtils.getPathByUri(uri, this);
+                file = new File(path);
+                ivAvatar.setImageURI(uri);
+                break;
+            case Utils.PIC_FROM_CAMERA:
+                if (resultCode != RESULT_OK) {
+                    ToastUtils.showShort("拍照失败");
+                    break;
+                }
+                path = FileUtils.getPathByUri(Utils.filrUri, this);
+                ivAvatar.setImageURI(Utils.filrUri);
+                file = new File(path);
+                break;
+        }
     }
 
     @Override
@@ -68,6 +110,12 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
         edtCarMsg = (TextInputEditText) findViewById(R.id.edt_car_msg);
         cbConfirm = (AppCompatCheckBox) findViewById(R.id.cb_confirm);
         btnRegister.setOnClickListener(this);
+        ivAvatar = (ImageView) findViewById(R.id.iv_avatar);
+        rlGender = (CannotClickChildRl) findViewById(R.id.rl_gender);
+
+        rlGender.setOnClickListener(this);
+        ivAvatar.setOnClickListener(this);
+        edtGender.setOnClickListener(this);
     }
 
     private boolean check() {
@@ -93,11 +141,21 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
     }
 
     private void register() {
+        if (null == file) {
+            ToastUtils.showShort("请上传头像");
+            return;
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         Call<ResponseData<RegisterBean>> callRegister = registerService.register(phone, password, username, gender, vertifyCode,
-                carCode, carMsg);
+                carCode, carMsg, requestBody);
         callRegister.enqueue(new Callback<ResponseData<RegisterBean>>() {
             @Override
             public void onResponse(Call<ResponseData<RegisterBean>> call, Response<ResponseData<RegisterBean>> response) {
+                if (null == response.body()) {
+                    ToastUtils.showShort(response.message());
+                    return;
+                }
+
                 ToastUtils.showShort(response.body().getMessage());
                 RegisterVertifyMsgActivity.this.finish();
             }
@@ -117,6 +175,23 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
             case R.id.btn_register:
                 if (check())
                     register();
+                break;
+            case R.id.iv_avatar:
+                Utils.showChoosePicDialog(RegisterVertifyMsgActivity.this);
+                break;
+            case R.id.rl_gender:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("请选择性别").setPositiveButton("男", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        edtGender.setText("男");
+                    }
+                }).setNegativeButton("女", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        edtGender.setText("女");
+                    }
+                }).create().show();
                 break;
         }
     }

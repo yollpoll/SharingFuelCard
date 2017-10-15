@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/StyleWhiteBgRipple"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_root"
+    android:layout_height="88dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_month_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:text="月享"
+            android:textColor="#F57A23"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_month_share"
+            android:layout_below="@+id/tv_month_share"
+            android:layout_marginTop="10dp"
+            android:text="19个月"
+            android:textColor="@color/colorTextGray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text=">"
+            android:textColor="@color/colorTextGray"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="23dp"
+            android:layout_toLeftOf="@+id/tv_arrow"
+            android:text="套餐名字"
+            android:textColor="@color/recommendPlan" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_plan_name"
+            android:layout_below="@+id/tv_plan_name"
+            android:layout_marginTop="10dp"
+            android:text="套餐内容"
+            android:textColor="@color/colorText"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorLine" />
+</RelativeLayout>

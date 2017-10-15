@@ -52,10 +52,10 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/shape_card_number"
                 android:paddingBottom="7dp"
+                android:id="@+id/tv_car_code"
                 android:paddingLeft="20dp"
                 android:paddingRight="12dp"
                 android:paddingTop="7dp"
-                android:text="苏E77AE3"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </RelativeLayout>

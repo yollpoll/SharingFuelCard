@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,13 +18,37 @@ import com.gyf.barlibrary.BarParams;
 import com.gyf.barlibrary.ImmersionBar;
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
+import com.sharingfuelcard.sharingfuelcard.http.Httptools;
+import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
+import com.sharingfuelcard.sharingfuelcard.module.HomeDataBean;
+import com.sharingfuelcard.sharingfuelcard.module.PersonalBalanceBean;
+import com.sharingfuelcard.sharingfuelcard.module.PlanChoiceBean;
+import com.sharingfuelcard.sharingfuelcard.retrofitService.HomeService;
+import com.sharingfuelcard.sharingfuelcard.retrofitService.MineBalanceService;
+import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
 import com.sharingfuelcard.sharingfuelcard.utils.Utils;
+import com.sharingfuelcard.sharingfuelcard.view.adapter.MainPlanChoiceAdapter;
+import com.sharingfuelcard.sharingfuelcard.view.adapter.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends BaseActivity {
     private Button btnSetting, btnRegisterFuelCard;
     private TextView tvBalance, tvMonthTimes, tvMonthSharing, tvTitle, tvMoreChoice, tvHeadLeft;
     private RecyclerView rvPlan;
     private RelativeLayout rlTitle;
+    private Retrofit retrofit;
+    private MineBalanceService service;
+    private HomeService mHomeService;
+    private List<HomeDataBean.Choice> mChoices = new ArrayList<>();
+    private MainPlanChoiceAdapter mAdapter;
+    private HomeDataBean homeDataBean;
 
 
     public static void gotoMainActivity(Context context) {
@@ -69,7 +95,61 @@ public class MainActivity extends BaseActivity {
         ImmersionBar.with(this).fullScreen(true).init();
         int height = ImmersionBar.with(this).getStatusBarHeight(this);
         Utils.setMargins(rlTitle, 0, height, 0, 0);
+
+        mAdapter = new MainPlanChoiceAdapter(mChoices, onItemClickListener);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvPlan.setLayoutManager(layoutManager);
+        rvPlan.setAdapter(mAdapter);
+
+        retrofit = Httptools.getInstance().getRetrofit();
+        service = retrofit.create(MineBalanceService.class);
+        getHomeData();
     }
+
+
+    private void getHomeData() {
+        mHomeService = retrofit.create(HomeService.class);
+        Call<ResponseData<HomeDataBean>> call = mHomeService.getHomeData();
+        call.enqueue(new Callback<ResponseData<HomeDataBean>>() {
+            @Override
+            public void onResponse(Call<ResponseData<HomeDataBean>> call, Response<ResponseData<HomeDataBean>> response) {
+                homeDataBean = response.body().getData();
+                setBalance();
+                setChoice();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData<HomeDataBean>> call, Throwable t) {
+            }
+        });
+    }
+
+    private void setBalance() {
+        tvBalance.setText(homeDataBean.getBalance());
+        tvMonthSharing.setText(homeDataBean.getMonthlySharing());
+        tvMonthTimes.setText(homeDataBean.getSpareTime());
+    }
+    private void setChoice(){
+        mChoices.addAll(homeDataBean.getHOT());
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+    private OnItemClickListener onItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onClick(View view, int position) {
+            String type = mChoices.get(position).getType();
+            if ("d".equals(type)) {
+                //优选套餐
+                GreatChoiceActivity.gotoGreatChoiceActivity(getContext());
+            } else {
+                //一般套餐
+                PersonalChoiceActivity.gotoPersonalChoiceActivity(getContext());
+            }
+        }
+    };
+
 
     @Override
     protected void onLeftTVClick() {
@@ -89,9 +169,7 @@ public class MainActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.tv_more_choice:
-//                MoreChoiceActivity.gotoMoreChoiceActivity(this);
-//                PersonalChoiceActivity.gotoPersonalChoiceActivity(this);
-                GreatChoiceActivity.gotoGreatChoiceActivity(this);
+                MoreChoiceActivity.gotoMoreChoiceActivity(this);
                 break;
         }
     }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLine" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp">
+
+        <ImageView
+            android:id="@+id/iv_buy"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/icon_buy" />
+
+        <RelativeLayout
+            android:id="@+id/rl_buy_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_buy">
+
+            <TextView
+                android:id="@+id/tv_buy_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购买个人套餐"
+                android:textColor="@color/recommendPlan" />
+
+            <TextView
+                android:id="@+id/tv_buy_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_buy_type"
+                android:layout_marginTop="5dp"
+                android:text="2011-0-0"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_buy_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/rl_buy_msg"
+            android:layout_marginRight="20dp"
+            android:text="+1111111"
+            android:textColor="@color/recommendPlan"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLine" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp">
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/icon_recharge" />
+
+        <RelativeLayout
+            android:id="@+id/rl_share_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_share">
+
+            <TextView
+                android:id="@+id/tv_share_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每月共享金"
+                android:textColor="@color/recommendPlan" />
+
+            <TextView
+                android:id="@+id/tv_share_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_share_type"
+                android:layout_marginTop="5dp"
+                android:text="2011-0-0"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_share_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/rl_share_msg"
+            android:layout_marginRight="20dp"
+            android:text="+1111111"
+            android:textColor="@color/recommendPlan"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</LinearLayout>

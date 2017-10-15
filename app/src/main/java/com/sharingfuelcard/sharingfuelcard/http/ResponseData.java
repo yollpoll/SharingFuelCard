@@ -7,7 +7,16 @@ package com.sharingfuelcard.sharingfuelcard.http;
 public class ResponseData<T> {
     private boolean ifTure;
     private String message;
+    private int code;
     private T data;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public boolean isIfTure() {
         return ifTure;

@@ -19,6 +19,8 @@ import com.sharingfuelcard.sharingfuelcard.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by 鹏祺 on 2017/9/13.
@@ -52,8 +54,8 @@ public class Utils {
                 alertDialog.dismiss();
                 File file = activity.getExternalCacheDir();
                 File imgFile = new File(file, "temp.jpg");
-                if (file.exists())
-                    file.delete();
+                if (imgFile.exists())
+                    imgFile.delete();
                 try {
                     imgFile.createNewFile();
                 } catch (IOException e) {
@@ -100,5 +102,11 @@ public class Utils {
     public static int calculateDpToPx(int padding_in_dp, Context context) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (padding_in_dp * scale + 0.5f);
+    }
+
+    public static String getDate(long time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd mm:ss");
+        Date date = new Date(time);
+        return simpleDateFormat.format(date);
     }
 }

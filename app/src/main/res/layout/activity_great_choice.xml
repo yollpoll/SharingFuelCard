@@ -5,7 +5,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,8 +77,9 @@
                     android:layout_below="@+id/tv_add_money_title"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="14dp"
-                    android:gravity="center"
                     android:text="-"
+                    android:paddingBottom="10dp"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
 
@@ -105,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="1000"
+                        android:text="10000"
                         android:textColor="@color/recommendPlan"
                         android:textSize="20sp" />
 
@@ -184,7 +186,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical">
 
@@ -242,6 +244,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_alignParentBottom="true"
@@ -252,9 +255,9 @@
             style="@style/StyleCancelBind"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
             android:layout_weight="4"
             android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="合计:22222元"
             android:textColor="@color/recommendPlan" />
 

@@ -4,9 +4,11 @@ import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.http.Url;
 import com.sharingfuelcard.sharingfuelcard.module.LoginBean;
 import com.sharingfuelcard.sharingfuelcard.module.RegisterBean;
+import com.sharingfuelcard.sharingfuelcard.module.UserBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -14,6 +16,9 @@ import retrofit2.http.Query;
  */
 
 public interface LoginService {
-    @GET(Url.LOGIN)
+    @POST(Url.LOGIN)
     Call<ResponseData<LoginBean>> login(@Query("tel") long tel, @Query("password") String password);
+
+    @GET(Url.GET_USER)
+    Call<ResponseData<UserBean>> getUser(@Query("token") String token);
 }

@@ -5,25 +5,13 @@ package com.sharingfuelcard.sharingfuelcard.module;
  */
 
 public class LoginBean extends BaseBean {
-    private Data data;
+    private String token;
 
-    public Data getData() {
-        return data;
+    public String getToken() {
+        return token;
     }
 
-    public void setData(Data data) {
-        this.data = data;
-    }
-
-    public static class Data {
-        String token;
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
+    public void setToken(String token) {
+        this.token = token;
     }
 }

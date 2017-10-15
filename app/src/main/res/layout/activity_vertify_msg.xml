@@ -11,8 +11,9 @@
         android:id="@+id/iv_avatar"
         android:layout_width="86dp"
         android:layout_height="86dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="38dp"
         android:src="@mipmap/icon_camera" />
 
     <android.support.design.widget.TextInputLayout
@@ -34,30 +35,38 @@
             android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_gender"
-        android:layout_width="match_parent"
+    <com.sharingfuelcard.sharingfuelcard.view.weiget.CannotClickChildRl
+        android:id="@+id/rl_gender"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_username"
-        android:layout_marginLeft="57dp"
-        android:layout_marginRight="57dp"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/til_username">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edt_gender"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/icon_gender"
-            android:drawablePadding="5dp"
-            android:hint="性别"
-            android:textColorHint="@color/colorHint" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginLeft="57dp"
+            android:clickable="false"
+            android:layout_marginRight="57dp"
+            android:layout_marginTop="10dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:drawableLeft="@mipmap/icon_gender"
+                android:drawablePadding="5dp"
+                android:hint="性别"
+                android:textColorHint="@color/colorHint" />
+        </android.support.design.widget.TextInputLayout>
+    </com.sharingfuelcard.sharingfuelcard.view.weiget.CannotClickChildRl>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_car_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_gender"
+        android:layout_below="@+id/rl_gender"
         android:layout_marginLeft="57dp"
         android:layout_marginRight="57dp"
         android:layout_marginTop="10dp">

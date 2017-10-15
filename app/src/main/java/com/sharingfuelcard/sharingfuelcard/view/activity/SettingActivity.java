@@ -11,9 +11,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
+import com.sharingfuelcard.sharingfuelcard.http.Url;
+import com.sharingfuelcard.sharingfuelcard.module.UserBean;
+import com.sharingfuelcard.sharingfuelcard.utils.SPUtiles;
 import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 
 /**
@@ -23,10 +27,12 @@ import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 
 public class SettingActivity extends BaseActivity {
     private TextView tvMyFuelCard, tvCurrentPlan, tvHistoryRecharge, tvChangePswd, tvChangeAdress,
-            tvContact, tvTitle;
+            tvContact, tvUsername, tvTitle;
     private Button btnLogout;
     private RelativeLayout rlTitle;
+    private TextView tvCarCode;
     private ImageView ivAvatar;
+    private UserBean userBean;
 
     public static void gotoSettingActivity(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
@@ -54,6 +60,8 @@ public class SettingActivity extends BaseActivity {
         btnLogout = (Button) findViewById(R.id.btn_logout);
         ivAvatar = (ImageView) findViewById(R.id.iv_avatar);
         tvtitle = (TextView) findViewById(R.id.tv_title);
+        tvUsername = (TextView) findViewById(R.id.tv_username);
+        tvCarCode = (TextView) findViewById(R.id.tv_car_code);
 
         tvMyFuelCard.setOnClickListener(this);
         tvCurrentPlan.setOnClickListener(this);
@@ -74,6 +82,11 @@ public class SettingActivity extends BaseActivity {
         int height = ImmersionBar.with(this).getStatusBarHeight(this);
         Utils.setMargins(rlTitle, 0, height, 0, 0);
         setHeadLeftImg(R.mipmap.icon_back_whie);
+
+        userBean = SPUtiles.getUser();
+        tvUsername.setText(userBean.getUsername());
+        tvCarCode.setText(userBean.getLicense_plate());
+        Glide.with(this).load(Url.HEAD_URL + userBean.getAvatar()).into(ivAvatar);
     }
 
     @Override

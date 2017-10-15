@@ -2,9 +2,13 @@ package com.sharingfuelcard.sharingfuelcard.http;
 
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,6 +25,7 @@ public class Httptools {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Url.HEAD_URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(getOkHttpClient())
                     .build();
         }
         return retrofit;
@@ -42,6 +47,15 @@ public class Httptools {
         return instance;
     }
 
+    public static OkHttpClient getOkHttpClient() {
+        Interceptor interceptor = new AddTokenInterceptor();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(30 * 1000, TimeUnit.MILLISECONDS)
+                .readTimeout(30 * 1000, TimeUnit.MILLISECONDS)
+                .addInterceptor(interceptor)
+                .build();
+        return client;
+    }
 
     /**
      * 根据文件创建requestbody

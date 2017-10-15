@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="油卡卡号"
+            android:singleLine="true"
             android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 
@@ -49,6 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:singleLine="true"
             android:textColorHint="@color/colorHint" />
     </android.support.design.widget.TextInputLayout>
 

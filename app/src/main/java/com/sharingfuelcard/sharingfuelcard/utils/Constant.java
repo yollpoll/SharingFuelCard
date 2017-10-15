@@ -7,6 +7,8 @@ package com.sharingfuelcard.sharingfuelcard.utils;
  */
 
 public class Constant {
+    public static final int SINOPEC = 1;
+    public static final int CNPC = 2;
     public static final String SD_CACHE_DIR = "/fuelcard";
     public static final String COOKIE = "cookie";
     public static final String IMG_CACHE = "/img";
