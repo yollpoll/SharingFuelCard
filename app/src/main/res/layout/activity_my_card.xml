@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_title"
-        android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/icon_no_card" />
+        android:src="@mipmap/icon_no_card"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/rl_card"
@@ -34,7 +34,7 @@
 
         <com.sharingfuelcard.sharingfuelcard.view.weiget.ViewPagerIndex
             android:id="@+id/vpindex"
-            android:layout_width="30dp"
+            android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_below="@+id/vp_card"
             android:layout_centerHorizontal="true"

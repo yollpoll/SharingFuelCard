@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/tv_address_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="地址:" />
+
+    <TextView
+        android:id="@+id/tv_current_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/tv_address_left"
+        android:gravity="center"
+        android:text="北京>>>>>>>>>>>>" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_current_address"
+        android:layout_marginTop="5dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edt_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入新的地址"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:textColorHint="@color/colorHint"
+            android:textSize="14sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til_address"
+        android:layout_marginRight="20dp">
+
+        <Button
+            android:id="@+id/btn_address_submit"
+            style="@style/StyleBtnLogin"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/btn_address_cancel"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_address_cancel"
+            style="@style/StyleBtnLogin"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:text="取消"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</RelativeLayout>

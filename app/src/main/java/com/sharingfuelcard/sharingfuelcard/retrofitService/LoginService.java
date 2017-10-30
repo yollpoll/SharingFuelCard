@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface LoginService {
     @POST(Url.LOGIN)
-    Call<ResponseData<LoginBean>> login(@Query("tel") long tel, @Query("password") String password);
+    Call<ResponseData<LoginBean>> login(@Query("tel") String tel, @Query("password") String password);
 
     @GET(Url.GET_USER)
     Call<ResponseData<UserBean>> getUser(@Query("token") String token);

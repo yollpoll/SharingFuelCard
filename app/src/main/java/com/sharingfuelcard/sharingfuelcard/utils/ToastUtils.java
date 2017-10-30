@@ -12,6 +12,8 @@ import com.sharingfuelcard.sharingfuelcard.base.MyApplication;
  */
 public class ToastUtils {
     public static void showShort(String content) {
+        if (null == content)
+            return;
         Toast.makeText(MyApplication.getInstance().getApplicationContext(), content, Toast.LENGTH_SHORT).show();
     }
 

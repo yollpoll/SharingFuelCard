@@ -23,11 +23,12 @@
             android:id="@+id/tv_name_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_card_code"
             android:layout_below="@+id/tv_card_code"
+            android:layout_marginLeft="37dp"
             android:layout_marginTop="20dp"
             android:text="NAME"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -37,7 +38,8 @@
             android:layout_below="@+id/tv_name_title"
             android:layout_marginTop="5dp"
             android:text="姓名"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_card_name"
@@ -45,9 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/tv_card_code"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="23dp"
             android:layout_marginTop="40dp"
             android:text="油卡1"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="12sp" />
     </RelativeLayout>
 </RelativeLayout>

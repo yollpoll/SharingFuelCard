@@ -38,7 +38,13 @@
     <style name="StyleGreatChoiceLeft">
         <item name="android:background">@drawable/shape_great_choice_left</item>
     </style>
+
     <style name="StyleGreatChoiceRight">
         <item name="android:background">@drawable/shape_great_choice_right</item>
+    </style>
+
+    <style name="popup_window_bottombar">
+        <item name="android:windowEnterAnimation">@anim/anim_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_popup_out</item>
     </style>
 </resources>

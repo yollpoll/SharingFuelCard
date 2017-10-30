@@ -10,10 +10,9 @@ public class Constant {
     public static final int SINOPEC = 1;
     public static final int CNPC = 2;
     public static final String SD_CACHE_DIR = "/fuelcard";
-    public static final String COOKIE = "cookie";
-    public static final String IMG_CACHE = "/img";
-    public static final String NEW_THREAD_RESPONSE_PATH = "/new_thread.html";
-    public static final int TAG_ZHIBANSHI_ID = 18;
-    public static final String TIME_LINE = "-1";
 
+    public static final String PERSONAL_PLAN = "a";
+    public static final String COMPANY_PLAN = "c";
+    public static final String FAMILY_PLAN = "b";
+    public static final String GREAT_PLAN = "d";
 }

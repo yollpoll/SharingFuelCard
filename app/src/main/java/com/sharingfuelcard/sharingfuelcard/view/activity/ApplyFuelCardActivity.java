@@ -21,6 +21,7 @@ import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 import com.sharingfuelcard.sharingfuelcard.http.Httptools;
 import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
+import com.sharingfuelcard.sharingfuelcard.module.BuyCardBean;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.BuyCardService;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.RegisterService;
 import com.sharingfuelcard.sharingfuelcard.utils.FileUtils;
@@ -30,6 +31,7 @@ import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 import java.io.File;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +42,7 @@ import retrofit2.Retrofit;
  * Created by 鹏祺 on 2017/9/7.
  */
 
-public class ApplyFuelCardActivity extends BaseActivity {
+public class ApplyFuelCardActivity extends BaseActivity implements AliPayActivity.AliPayCallbackInterface {
     private static final int PHOTO1 = 1;
     private static final int PHOTO2 = 2;
 
@@ -180,22 +182,27 @@ public class ApplyFuelCardActivity extends BaseActivity {
     private void buyCard() {
         mBuyCardService = retrofit.create(BuyCardService.class);
         RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
+        MultipartBody.Part part1 = MultipartBody.Part.createFormData("IDCard_A", file1.getName(), body1);
         RequestBody body2 = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
-        Call<ResponseData<String>> call = mBuyCardService.buyCard(identifyCode, trueName, adress, tel, "",
-                body1, body2);
-        call.enqueue(new Callback<ResponseData<String>>() {
+        MultipartBody.Part part2 = MultipartBody.Part.createFormData("IDCard_B", file2.getName(), body2);
+
+        Call<ResponseData<BuyCardBean>> call = mBuyCardService.buyCard(identifyCode, trueName, adress, tel, "2",
+                part1, part2);
+        showLoadingDialog(this);
+        call.enqueue(new Callback<ResponseData<BuyCardBean>>() {
             @Override
-            public void onResponse(Call<ResponseData<String>> call, Response<ResponseData<String>> response) {
-                if (response.body().getCode() == 200) {
-                    ToastUtils.showShort("购买成功");
-                    ApplyFuelCardActivity.this.finish();
+            public void onResponse(Call<ResponseData<BuyCardBean>> call, Response<ResponseData<BuyCardBean>> response) {
+                dismissLoadingDialog();
+                if (response.body().getCode() == 1) {
+                    AliPayActivity.gotoPay(ApplyFuelCardActivity.this,
+                            response.body().getData().getOrderInfo(),
+                            ApplyFuelCardActivity.this);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseData<String>> call, Throwable t) {
-                Log.d("spq", "xxxxxxxxxxx");
-
+            public void onFailure(Call<ResponseData<BuyCardBean>> call, Throwable t) {
+                dismissLoadingDialog();
             }
         });
     }
@@ -203,6 +210,7 @@ public class ApplyFuelCardActivity extends BaseActivity {
     private void getSmsCode() {
         tel = edtPhone.getText().toString();
         Call<ResponseData<String>> call = mRegisterService.getSmsCode(tel);
+        tvGetSmsCode.setClickable(false);
         call.enqueue(new Callback<ResponseData<String>>() {
             @Override
             public void onResponse(Call<ResponseData<String>> call, Response<ResponseData<String>> response) {
@@ -223,10 +231,12 @@ public class ApplyFuelCardActivity extends BaseActivity {
                         ToastUtils.showShort("验证码出错");
                     }
                 }
+                tvGetSmsCode.setClickable(true);
             }
 
             @Override
             public void onFailure(Call<ResponseData<String>> call, Throwable t) {
+                tvGetSmsCode.setClickable(true);
             }
         });
     }
@@ -251,5 +261,20 @@ public class ApplyFuelCardActivity extends BaseActivity {
                 getSmsCode();
                 break;
         }
+    }
+
+    @Override
+    public void paySuccess() {
+        this.finish();
+    }
+
+    @Override
+    public void payFail() {
+        ToastUtils.showShort("支付失败");
+    }
+
+    @Override
+    public void payWaitting() {
+
     }
 }

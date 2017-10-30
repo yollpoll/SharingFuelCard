@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
 import com.sharingfuelcard.sharingfuelcard.http.Httptools;
@@ -41,7 +42,7 @@ public class LoginActivity extends BaseActivity {
     private boolean isPhoneClear = true, isPswdClear = true;
     private Retrofit retrofit;
     private LoginService loginService;
-    private long phone;
+    private String phone;
     private String password;
 
 
@@ -123,12 +124,11 @@ public class LoginActivity extends BaseActivity {
             }
         });
         phone = SPUtiles.getUsername();
-        if (phone != -1)
-            edtPhone.setText(phone + "");
+        edtPhone.setText(phone);
     }
 
     private boolean check() {
-        phone = Long.parseLong(edtPhone.getText().toString());
+        phone = edtPhone.getText().toString();
         password = edtPassword.getText().toString();
         return true;
     }
@@ -140,6 +140,7 @@ public class LoginActivity extends BaseActivity {
         call.enqueue(new Callback<ResponseData<LoginBean>>() {
             @Override
             public void onResponse(Call<ResponseData<LoginBean>> call, Response<ResponseData<LoginBean>> response) {
+                ToastUtils.showShort(response.body().getMessage());
                 String token = "";
                 try {
                     token = response.body().getData().getToken();
@@ -153,7 +154,6 @@ public class LoginActivity extends BaseActivity {
                     LoginActivity.this.finish();
                     RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
                 } else {
-                    ToastUtils.showShort("登陆失败");
                 }
             }
 
@@ -162,6 +162,7 @@ public class LoginActivity extends BaseActivity {
                 Log.d("spq", t.getMessage());
             }
         });
+
     }
 
     private void getUser() {
@@ -203,6 +204,9 @@ public class LoginActivity extends BaseActivity {
 //                RegisterFuelCardActivity.gotoApplyFurlCardActivity(getContext());
                 break;
             case R.id.tv_login_via_wechat:
+                break;
+            case R.id.tv_forgetpswd:
+                ForgetPasswordActivity.gotoForgetPasswordActivity(this);
                 break;
         }
     }

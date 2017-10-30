@@ -21,6 +21,7 @@ import com.sharingfuelcard.sharingfuelcard.module.MyCardMsgBean;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.BindCardService;
 import com.sharingfuelcard.sharingfuelcard.retrofitService.MyFuelCardService;
 import com.sharingfuelcard.sharingfuelcard.utils.Constant;
+import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
 import com.sharingfuelcard.sharingfuelcard.view.weiget.CycleGalleryViewPager;
 import com.sharingfuelcard.sharingfuelcard.view.weiget.ViewPagerIndex;
 
@@ -46,6 +47,7 @@ public class MyFeulCardActivity extends BaseActivity {
     private PagerAdapter mAdapter;
     private RelativeLayout rlCard;
     private ImageView ivNoCard;
+    private MyCardMsgBean currentCard;
 
     public static void gotoMyFuelCardActivity(Context context) {
         Intent intent = new Intent(context, MyFeulCardActivity.class);
@@ -83,7 +85,7 @@ public class MyFeulCardActivity extends BaseActivity {
         super.initData();
         setTitle("我的油卡");
         showBack();
-        index.setIndexCount(list.size());
+//        index.setIndexCount(list.size());
         mAdapter = new PagerAdapter() {
             @Override
             public int getCount() {
@@ -146,6 +148,7 @@ public class MyFeulCardActivity extends BaseActivity {
                 tvName.setText(list.get(position).getOilcard_name());
                 tvCardCode.setText(list.get(position).getOilcard_id());
                 index.setCurrentCount(position);
+                currentCard = list.get(position);
             }
 
             @Override
@@ -163,12 +166,28 @@ public class MyFeulCardActivity extends BaseActivity {
         call.enqueue(new Callback<ResponseData<List<MyCardMsgBean>>>() {
             @Override
             public void onResponse(Call<ResponseData<List<MyCardMsgBean>>> call, Response<ResponseData<List<MyCardMsgBean>>> response) {
-                if (null == response.body()) {
+                list.clear();
+                list.addAll(response.body().getData());
+                if (list.size() > 0) {
+                    currentCard = list.get(0);
+
+                    switch (currentCard.getOilcard_type()) {
+                        case Constant.SINOPEC:
+                            tvCardName.setText("中国石化");
+                            break;
+                        case Constant.CNPC:
+                            tvCardName.setText("中国石油");
+                            break;
+                    }
+                    tvName.setText(currentCard.getOilcard_name());
+                    tvCardCode.setText(currentCard.getOilcard_id());
+                    index.setCurrentCount(0);
+                } else {
                     ivNoCard.setVisibility(View.VISIBLE);
                     rlCard.setVisibility(View.GONE);
                     return;
                 }
-                list.addAll(response.body().getData());
+                index.setIndexCount(list.size());
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -179,12 +198,38 @@ public class MyFeulCardActivity extends BaseActivity {
         });
     }
 
+    private void unBindCard() {
+        if (currentCard == null)
+            return;
+        Call<ResponseData<String>> call = myFuelCardService.unBindCare(currentCard.getOilcard_id());
+        call.enqueue(new Callback<ResponseData<String>>() {
+            @Override
+            public void onResponse(Call<ResponseData<String>> call, Response<ResponseData<String>> response) {
+                ToastUtils.showShort(response.body().getMessage());
+                if (1 == response.body().getCode())
+                    getData();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData<String>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.iv_nocard:
-                ApplyFuelCardActivity.gotoApplyFurlCard(this);
+                RegisterFuelCardActivity.gotoApplyFurlCardActivity(this);
+//                ApplyFuelCardActivity.gotoApplyFurlCard(this);
+                break;
+            case R.id.tv_cancel_bind:
+                unBindCard();
+                break;
+            case R.id.tv_buy:
+                MoreChoiceActivity.gotoMoreChoiceActivity(this);
                 break;
         }
     }

@@ -97,10 +97,10 @@ public class MoreChoiceActivity extends BaseActivity {
             String type = list.get(position).getType();
             if ("d".equals(type)) {
                 //优选套餐
-                GreatChoiceActivity.gotoGreatChoiceActivity(getContext());
+                GreatChoiceActivity.gotoGreatChoiceActivity(getContext(),list.get(position).getDiscount_rate());
             } else {
                 //一般套餐
-                PersonalChoiceActivity.gotoPersonalChoiceActivity(getContext());
+                PersonalChoiceActivity.gotoPersonalChoiceActivity(getContext(),list.get(position).getType());
             }
         }
     };

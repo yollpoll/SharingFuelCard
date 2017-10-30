@@ -14,6 +14,15 @@ public class PlanChoiceBean extends BaseBean {
     private Double original_price;
     private Double discount_rate;
     private String combo_name;
+    private boolean isCheck = false;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public int getId() {
         return id;

@@ -55,6 +55,7 @@ public class RegisterFuelCardActivity extends BaseActivity {
     @Override
     protected void onRightTVClick() {
         super.onRightTVClick();
+        this.finish();
         MainActivity.gotoMainActivity(getContext());
     }
 

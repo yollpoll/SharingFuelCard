@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_buy_type"
                 android:layout_marginTop="5dp"
-                android:text="2011-0-0"
+                android:text=""
                 android:textColor="#888888"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -55,7 +55,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/rl_buy_msg"
             android:layout_marginRight="20dp"
-            android:text="+1111111"
+            android:text=""
             android:textColor="@color/recommendPlan"
             android:textSize="16sp" />
     </RelativeLayout>
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_share_type"
                 android:layout_marginTop="5dp"
-                android:text="2011-0-0"
+                android:text=""
                 android:textColor="#888888"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -110,7 +110,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/rl_share_msg"
             android:layout_marginRight="20dp"
-            android:text="+1111111"
+            android:text=""
             android:textColor="@color/recommendPlan"
             android:textSize="16sp" />
     </RelativeLayout>

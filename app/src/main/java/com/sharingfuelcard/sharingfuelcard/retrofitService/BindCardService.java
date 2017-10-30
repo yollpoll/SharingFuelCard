@@ -15,7 +15,7 @@ import retrofit2.http.Query;
  */
 
 public interface BindCardService {
-    @POST(Url.BIND_CARD)
+    @GET(Url.BIND_CARD)
     Call<ResponseData<BaseBean>> bindCard(@Query("oilcard_id") String oilcard_id, @Query("oilard_password") String oilard_password,
                                           @Query("oilcard_type") int oilcard_type, @Query("oilcard_name") String oilcard_name);
 

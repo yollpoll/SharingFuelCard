@@ -13,7 +13,16 @@ public class RechargeHistoryBean extends BaseBean {
     private String effective_time;
     private String combo_price;
     private String user_id;
+    private String original_price;
     private String oilcard_id;
+
+    public String getOriginal_price() {
+        return original_price;
+    }
+
+    public void setOriginal_price(String original_price) {
+        this.original_price = original_price;
+    }
 
     public String getCo_id() {
         return co_id;

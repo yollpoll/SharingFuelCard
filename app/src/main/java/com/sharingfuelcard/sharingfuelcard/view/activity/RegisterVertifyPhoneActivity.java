@@ -108,9 +108,11 @@ public class RegisterVertifyPhoneActivity extends BaseActivity {
             return;
         }
         Call<ResponseData<String>> call = mRegisterService.getSmsCode(tel);
+        tvVertifyCode.setClickable(false);
         call.enqueue(new Callback<ResponseData<String>>() {
             @Override
             public void onResponse(Call<ResponseData<String>> call, Response<ResponseData<String>> response) {
+                tvVertifyCode.setClickable(true);
                 String[] code = response.body().getData().split(":");
                 if (response.body().getCode() == 0) {
                     ToastUtils.showShort("访问失败");
@@ -132,6 +134,7 @@ public class RegisterVertifyPhoneActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ResponseData<String>> call, Throwable t) {
+                tvVertifyCode.setClickable(true);
             }
         });
     }

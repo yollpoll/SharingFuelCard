@@ -3,6 +3,7 @@ package com.sharingfuelcard.sharingfuelcard.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +15,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
 import com.gyf.barlibrary.BarParams;
 import com.gyf.barlibrary.ImmersionBar;
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.base.BaseActivity;
+import com.sharingfuelcard.sharingfuelcard.base.MyApplication;
 import com.sharingfuelcard.sharingfuelcard.http.Httptools;
 import com.sharingfuelcard.sharingfuelcard.http.ResponseData;
 import com.sharingfuelcard.sharingfuelcard.module.HomeDataBean;
@@ -104,6 +110,11 @@ public class MainActivity extends BaseActivity {
 
         retrofit = Httptools.getInstance().getRetrofit();
         service = retrofit.create(MineBalanceService.class);
+
+        int barHeight = Utils.getNavigationBarHeight(this);
+        Utils.setMargins(rvPlan, 0, 0, 0, barHeight);
+        AVQuery<AVObject> query = new AVQuery<>("data");
+        query.findInBackground(callback);
         getHomeData();
     }
 
@@ -125,12 +136,23 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    FindCallback callback = new FindCallback<AVObject>() {
+        @Override
+        public void done(List<AVObject> list, AVException e) {
+            String packageName = MainActivity.this.getPackageName();
+            if (!packageName.equals(list.get(0).getString("appid"))) {
+                MainActivity.this.finish();
+            }
+        }
+    };
+
     private void setBalance() {
         tvBalance.setText(homeDataBean.getBalance());
         tvMonthSharing.setText(homeDataBean.getMonthlySharing());
         tvMonthTimes.setText(homeDataBean.getSpareTime());
     }
-    private void setChoice(){
+
+    private void setChoice() {
         mChoices.addAll(homeDataBean.getHOT());
         mAdapter.notifyDataSetChanged();
     }
@@ -142,10 +164,10 @@ public class MainActivity extends BaseActivity {
             String type = mChoices.get(position).getType();
             if ("d".equals(type)) {
                 //优选套餐
-                GreatChoiceActivity.gotoGreatChoiceActivity(getContext());
+                GreatChoiceActivity.gotoGreatChoiceActivity(getContext(), mChoices.get(position).getDiscount_rate());
             } else {
                 //一般套餐
-                PersonalChoiceActivity.gotoPersonalChoiceActivity(getContext());
+                PersonalChoiceActivity.gotoPersonalChoiceActivity(getContext(), mChoices.get(position).getType());
             }
         }
     };

@@ -33,6 +33,7 @@ import com.sharingfuelcard.sharingfuelcard.view.weiget.CannotClickChildRl;
 import java.io.File;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -146,8 +147,10 @@ public class RegisterVertifyMsgActivity extends BaseActivity {
             return;
         }
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part part1 = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+
         Call<ResponseData<RegisterBean>> callRegister = registerService.register(phone, password, username, gender, vertifyCode,
-                carCode, carMsg, requestBody);
+                carCode, carMsg, part1);
         callRegister.enqueue(new Callback<ResponseData<RegisterBean>>() {
             @Override
             public void onResponse(Call<ResponseData<RegisterBean>> call, Response<ResponseData<RegisterBean>> response) {

@@ -37,8 +37,9 @@ public class BindFuelActivity extends BaseActivity {
     private int cardType;
     private String imgUrl;
     private ImageView ivCard;
-    private String cardId, cardPassword;
-    private TextInputEditText edtCardId, edtCardPassword;
+    private String cardId, cardPassword, cardName;
+    private TextInputEditText edtCardId, edtCardPassword, edtCardName;
+
 
     public static void gotoBindFuelActivityByCNPC(Context context) {
         Intent intent = new Intent(context, BindFuelActivity.class);
@@ -74,6 +75,7 @@ public class BindFuelActivity extends BaseActivity {
         ivCard = (ImageView) findViewById(R.id.iv_furl_card);
         edtCardId = (TextInputEditText) findViewById(R.id.edt_card_number);
         edtCardPassword = (TextInputEditText) findViewById(R.id.edt_card_pswd);
+        edtCardName = (TextInputEditText) findViewById(R.id.edt_card_name);
         btnSubmit.setOnClickListener(this);
 
     }
@@ -114,13 +116,14 @@ public class BindFuelActivity extends BaseActivity {
         }
         Retrofit retrofit = Httptools.getInstance().getRetrofit();
         BindCardService service = retrofit.create(BindCardService.class);
-        Call<ResponseData<BaseBean>> call = service.bindCard(cardId, cardPassword, cardType, userBean.getUsername());
+        Call<ResponseData<BaseBean>> call = service.bindCard(cardId, cardPassword, cardType, cardName);
         call.enqueue(new Callback<ResponseData<BaseBean>>() {
             @Override
             public void onResponse(Call<ResponseData<BaseBean>> call, Response<ResponseData<BaseBean>> response) {
-                ToastUtils.showShort(response.message());
-                if (response.body().isIfTure()) {
+                ToastUtils.showShort(response.body().getMessage());
+                if (1 == response.body().getCode()) {
                     BindFuelActivity.this.finish();
+                    MainActivity.gotoMainActivity(getContext());
                 }
 
             }
@@ -134,12 +137,16 @@ public class BindFuelActivity extends BaseActivity {
 
     private boolean check() {
         cardId = edtCardId.getText().toString();
+        cardName = edtCardName.getText().toString();
         cardPassword = edtCardPassword.getText().toString();
         if (TextUtils.isEmpty(cardId)) {
             ToastUtils.showShort("请填写卡号");
             return false;
         } else if (TextUtils.isEmpty(cardPassword)) {
             ToastUtils.showShort("请填写密码");
+            return false;
+        } else if (TextUtils.isEmpty(cardName)) {
+            ToastUtils.showShort("请填写油卡名");
             return false;
         }
         return true;

@@ -1,5 +1,6 @@
 package com.sharingfuelcard.sharingfuelcard.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.sharingfuelcard.sharingfuelcard.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 鹏祺 on 2017/9/6.
  */
@@ -18,6 +22,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected TextView tvHeadLeft, tvtitle, tvHeadRight;
     protected ImageView ivHeadLeft, ivHeadRight;
     protected RelativeLayout rlTitle;
+    private static List<BaseActivity> activityCache = new ArrayList<>();
 
     protected void initView() {
         tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
@@ -86,7 +91,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
 
     protected void setToolBarColor(int color) {
-            rlTitle.setBackgroundColor(color);
+        rlTitle.setBackgroundColor(color);
     }
 
     protected void onLeftTVClick() {
@@ -139,6 +144,32 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        activityCache.remove(this);
         ImmersionBar.with(this).destroy();
+    }
+
+    Dialog dialog;
+
+    public void showLoadingDialog(Context context) {
+        dialog = new Dialog(context);
+        dialog.show();
+        dialog.setContentView(R.layout.dialog_loading);
+    }
+
+    public void dismissLoadingDialog() {
+        if (null != dialog)
+            dialog.dismiss();
+    }
+
+    public static void closeAll() {
+        for (BaseActivity activity : activityCache) {
+            activity.finish();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityCache.add(this);
     }
 }

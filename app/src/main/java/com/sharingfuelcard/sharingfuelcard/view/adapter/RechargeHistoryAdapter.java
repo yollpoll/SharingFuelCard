@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.sharingfuelcard.sharingfuelcard.R;
 import com.sharingfuelcard.sharingfuelcard.module.RechargeHistoryBean;
+import com.sharingfuelcard.sharingfuelcard.utils.Constant;
 import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 
 import java.util.ArrayList;
@@ -34,9 +35,24 @@ public class RechargeHistoryAdapter extends RecyclerView.Adapter<RechargeHistory
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         RechargeHistoryBean item = list.get(position);
-        holder.tvBuyType.setText(item.getCombo_type());
+        String type = "";
+        switch (item.getCombo_type()) {
+            case Constant.PERSONAL_PLAN:
+                type = "个人套餐";
+                break;
+            case Constant.FAMILY_PLAN:
+                type = "家庭套餐";
+                break;
+            case Constant.COMPANY_PLAN:
+                type = "企业套餐";
+                break;
+            case Constant.GREAT_PLAN:
+                type = "优选套餐";
+                break;
+        }
+        holder.tvBuyType.setText(type);
         holder.tvBuyData.setText(Utils.getDate(item.getOrder_time()));
-        holder.tvBuyMoney.setText(item.getCombo_price());
+        holder.tvBuyMoney.setText(item.getOriginal_price());
         holder.tvShareMoney.setText(item.getMonthly_sharing());
         holder.tvShareDate.setText(Utils.getDate(item.getOrder_time()));
     }

@@ -13,12 +13,12 @@ public class SPUtiles {
     public static final String USER = "user";
     public static final String USERNAME = "username";
 
-    public static long getUsername() {
-        return SharePreferencesUtils.getLong(USERNAME);
+    public static String getUsername() {
+        return SharePreferencesUtils.getString(USERNAME);
     }
 
-    public static void saveUsername(long username) {
-        SharePreferencesUtils.putLong(USERNAME, username);
+    public static void saveUsername(String username) {
+        SharePreferencesUtils.putString(USERNAME, username);
     }
 
     public static UserBean getUser() {
@@ -29,8 +29,13 @@ public class SPUtiles {
     }
 
     public static void saveUser(UserBean userBean) {
-        Gson gson = new Gson();
-        String json = gson.toJson(userBean);
+        String json;
+        if (null != userBean) {
+            Gson gson = new Gson();
+            json = gson.toJson(userBean);
+        } else {
+            json = "";
+        }
         SharePreferencesUtils.putString(USER, json);
     }
 

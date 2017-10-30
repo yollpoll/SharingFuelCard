@@ -5,6 +5,7 @@ import android.util.Log;
 import com.sharingfuelcard.sharingfuelcard.base.MyApplication;
 import com.sharingfuelcard.sharingfuelcard.utils.SPUtiles;
 import com.sharingfuelcard.sharingfuelcard.view.activity.LoginActivity;
+import com.sharingfuelcard.sharingfuelcard.view.activity.LuncherActivity;
 
 import org.json.JSONObject;
 
@@ -37,15 +38,19 @@ public class AddTokenInterceptor implements Interceptor {
             JSONObject jsonObject = new JSONObject(json);
             int stateCode = jsonObject.optInt("code");
             if (stateCode == 2) {
-                LoginActivity.gotoLoginActivity(MyApplication.getInstance().getApplicationContext());
+                SPUtiles.saveToken("");
+                LuncherActivity.gotoLuncherActivity(MyApplication.getInstance().getApplicationContext());
+//                LoginActivity.gotoLoginActivity(MyApplication.getInstance().getApplicationContext());
             } else {
-                // 这里值得注意。由于前面value.bytes()把响应流读完并关闭了，所以这里需要重新生成一个response，否则数据就无法正常解析了
-                response = response.newBuilder()
-                        .body(ResponseBody.create(null, resp))
-                        .build();
+
             }
         } catch (Exception e) {
-
+            Log.d("spq", "intercept error>>>>>>>" + e);
+        } finally {
+            // 这里值得注意。由于前面value.bytes()把响应流读完并关闭了，所以这里需要重新生成一个response，否则数据就无法正常解析了
+            response = response.newBuilder()
+                    .body(ResponseBody.create(null, resp))
+                    .build();
         }
         return response;
     }

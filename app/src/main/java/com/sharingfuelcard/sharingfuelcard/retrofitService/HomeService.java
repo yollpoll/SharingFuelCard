@@ -15,4 +15,5 @@ public interface HomeService {
     @GET(Url.GET_HOME_DATA)
     Call<ResponseData<HomeDataBean>> getHomeData();
 
+
 }

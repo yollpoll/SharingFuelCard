@@ -8,6 +8,24 @@ public class MyCardMsgBean extends BaseBean {
     private String oilcard_id;
     private int oilcard_type;
     private String oilcard_name;
+    private boolean icCheck=false;
+    private boolean enable=true;
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public boolean isIcCheck() {
+        return icCheck;
+    }
+
+    public void setIcCheck(boolean icCheck) {
+        this.icCheck = icCheck;
+    }
 
     public String getOilcard_id() {
         return oilcard_id;

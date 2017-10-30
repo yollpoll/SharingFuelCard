@@ -70,7 +70,11 @@ public class ViewPagerIndex extends LinearLayout {
                 mPaint.setColor(Color.parseColor("#eeeeee"));
                 Log.d("spq", "yyyy");
             }
-            canvas.drawCircle(i * (width / 3), 0, Utils.calculateDpToPx(2, getContext()), mPaint);
+            float x = (width / 2) - ((indexCount - ((i * 2) + 1)) * Utils.calculateDpToPx(4, getContext()));
+//            canvas.drawRect((i + 1) * (width / 3) - Utils.calculateDpToPx(10, getContext()), heigh / 2 - Utils.calculateDpToPx(2, getContext()),
+//                    (i + 1) * (width / 3) + Utils.calculateDpToPx(10, getContext()), heigh / 2 + Utils.calculateDpToPx(2, getContext()), mPaint);
+//            canvas.drawCircle((i + 1) * (width / 3), heigh / 2, Utils.calculateDpToPx(2, getContext()), mPaint);
+            canvas.drawCircle(x, heigh / 2, Utils.calculateDpToPx(2, getContext()), mPaint);
         }
     }
 }

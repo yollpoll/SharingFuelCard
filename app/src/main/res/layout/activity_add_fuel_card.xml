@@ -33,6 +33,7 @@
     <RelativeLayout
         android:id="@+id/rl_apply_fuel_card"
         style="@style/StyleApplyFuelCard"
+        android:visibility="gone"
         android:layout_width="327dp"
         android:layout_height="130dp"
         android:layout_below="@+id/iv_Sinopec"

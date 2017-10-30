@@ -39,7 +39,7 @@ public class MainPlanChoiceAdapter extends RecyclerView.Adapter<MainPlanChoiceAd
         holder.tvMonthShare.setText("月享" + item.getMonthly_sharing() + "");
         holder.tvMonth.setText("共" + item.getPeriod() + "个月");
         holder.tvPlanName.setText(item.getCombo_name());
-        holder.tvDetail.setText("折扣后优惠" + item.getDiscount_rate() * item.getOriginal_price() + "元");
+        holder.tvDetail.setText("折扣后优惠" + (int) ((1-item.getDiscount_rate()) * item.getOriginal_price()) + "元");
         if (null != onItemClickListener)
             holder.rlRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
