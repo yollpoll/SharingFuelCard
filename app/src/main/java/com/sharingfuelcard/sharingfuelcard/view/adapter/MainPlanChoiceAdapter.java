@@ -36,8 +36,8 @@ public class MainPlanChoiceAdapter extends RecyclerView.Adapter<MainPlanChoiceAd
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         HomeDataBean.Choice item = list.get(position);
-        holder.tvMonthShare.setText("月享" + item.getMonthly_sharing() + "");
-        holder.tvMonth.setText("共" + item.getPeriod() + "个月");
+        holder.tvMonthShare.setText("月享" + (int)Double.parseDouble(item.getMonthly_sharing()) + "");
+        holder.tvMonth.setText("共" + (int)Double.parseDouble(item.getPeriod()) + "个月");
         holder.tvPlanName.setText(item.getCombo_name());
         holder.tvDetail.setText("折扣后优惠" + (int) ((1-item.getDiscount_rate()) * item.getOriginal_price()) + "元");
         if (null != onItemClickListener)

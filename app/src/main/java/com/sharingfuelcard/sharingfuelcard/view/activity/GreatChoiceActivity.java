@@ -33,6 +33,7 @@ import com.sharingfuelcard.sharingfuelcard.utils.ToastUtils;
 import com.sharingfuelcard.sharingfuelcard.utils.Utils;
 import com.sharingfuelcard.sharingfuelcard.view.adapter.CardAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class GreatChoiceActivity extends BaseActivity implements AliPayActivity.
     private TextView tvMonthSharing;
     private double monthly_sharing = 500;
     private double combo_price = 10000;
-    private int period = 60;
+    private int period = 30;
     private BuyPlanService buyPlanService;
     private double rate;
 
@@ -133,10 +134,10 @@ public class GreatChoiceActivity extends BaseActivity implements AliPayActivity.
 
     private void setMoneyDetai(double combo_price) {
         monthly_sharing = (int) (combo_price / (period * rate));
-        tvDetail.setText("原价" + (int) (monthly_sharing * period) + "元，折扣价" + combo_price + "元，共节省" + (int) (monthly_sharing * period - combo_price) + "元");
-        tvMonthSharing.setText((int) monthly_sharing + "");
-        tvRechargeDetail.setText(monthly_sharing + "元/月*" + period + "个月=" + monthly_sharing * period + "元");
-        tvAllMoney.setText("合计:" + combo_price);
+        tvDetail.setText("原价" + df.format (monthly_sharing * period) + "元，折扣价" + df.format(combo_price) + "元，共节省" + df.format (monthly_sharing * period - combo_price) + "元");
+        tvMonthSharing.setText(df.format( monthly_sharing) + "");
+        tvRechargeDetail.setText(df.format(monthly_sharing) + "元/月*" + period + "个月=" + df.format(monthly_sharing * period) + "元");
+        tvAllMoney.setText("合计:" + df.format(combo_price));
     }
 
     private void changeMoney(int money) {
@@ -273,4 +274,6 @@ public class GreatChoiceActivity extends BaseActivity implements AliPayActivity.
     public void payWaitting() {
 
     }
+
+    DecimalFormat df = new DecimalFormat("###");
 }

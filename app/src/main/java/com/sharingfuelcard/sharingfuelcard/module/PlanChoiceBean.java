@@ -9,10 +9,10 @@ public class PlanChoiceBean extends BaseBean {
     private int id;
     private String type;
     private int period;
-    private Double monthly_sharing;
-    private Double combo_price;
-    private Double original_price;
-    private Double discount_rate;
+    private double monthly_sharing;
+    private double combo_price;
+    private double original_price;
+    private double discount_rate;
     private String combo_name;
     private boolean isCheck = false;
 
@@ -48,7 +48,7 @@ public class PlanChoiceBean extends BaseBean {
         this.period = period;
     }
 
-    public Double getMonthly_sharing() {
+    public double getMonthly_sharing() {
         return monthly_sharing;
     }
 
@@ -56,7 +56,7 @@ public class PlanChoiceBean extends BaseBean {
         this.monthly_sharing = monthly_sharing;
     }
 
-    public Double getCombo_price() {
+    public double getCombo_price() {
         return combo_price;
     }
 
@@ -64,7 +64,7 @@ public class PlanChoiceBean extends BaseBean {
         this.combo_price = combo_price;
     }
 
-    public Double getOriginal_price() {
+    public double getOriginal_price() {
         return original_price;
     }
 
@@ -72,7 +72,7 @@ public class PlanChoiceBean extends BaseBean {
         this.original_price = original_price;
     }
 
-    public Double getDiscount_rate() {
+    public double getDiscount_rate() {
         return discount_rate;
     }
 

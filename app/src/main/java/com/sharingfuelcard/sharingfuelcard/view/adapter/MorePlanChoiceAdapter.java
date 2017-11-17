@@ -38,9 +38,9 @@ public class MorePlanChoiceAdapter extends RecyclerView.Adapter<MorePlanChoiceAd
     public void onBindViewHolder(ViewHolder holder, final int position) {
         PlanChoiceBean item = list.get(position);
         holder.tvName.setText(item.getCombo_name());
-        holder.tvMonthMoney.setText(item.getMonthly_sharing() + "");
+        holder.tvMonthMoney.setText((int) (item.getMonthly_sharing()) + "");
         holder.tvMonth.setText("共" + item.getPeriod() + "个月");
-        holder.tvDiscountMoney.setText(item.getDiscount_rate() * item.getOriginal_price() + "元");
+        holder.tvDiscountMoney.setText((int) (item.getCombo_price() - item.getOriginal_price()) + "元");
         if (null != onBtnBuyClickListener)
             holder.btnBuy.setOnClickListener(new View.OnClickListener() {
                 @Override

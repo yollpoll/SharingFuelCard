@@ -316,12 +316,12 @@ public class PersonalChoiceActivity extends BaseActivity implements OnBuyPlanChe
     @Override
     public void onCheck(PlanChoiceBean item) {
         currentPlan = item;
-        tvFinalMoney.setText("合计:" + item.getOriginal_price() + "元");
-        tvMonthSharing.setText(item.getMonthly_sharing() + "");
-        tvDetail.setText("原价" + item.getCombo_price() + "元,折扣价" +
-                item.getOriginal_price() + "元,共节省" +
-                (item.getCombo_price() - item.getOriginal_price()) + "元");
-        tvRechargeDetail.setText(item.getMonthly_sharing() + "元/月*" + item.getPeriod() + "个月=" + item.getMonthly_sharing() * item.getPeriod());
+        tvFinalMoney.setText("合计:" + (int) (item.getOriginal_price()) + "元");
+        tvMonthSharing.setText((int) item.getMonthly_sharing() + "");
+        tvDetail.setText("原价" + (int) item.getCombo_price() + "元,折扣价" +
+                (int) item.getOriginal_price() + "元,共节省" +
+                (int) (item.getCombo_price() - item.getOriginal_price()) + "元");
+        tvRechargeDetail.setText((int) item.getMonthly_sharing() + "元/月*" +  item.getPeriod() + "个月=" + (int) item.getMonthly_sharing() * item.getPeriod()+"元");
     }
 
     private void buy() {

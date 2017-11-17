@@ -147,8 +147,8 @@ public class MainActivity extends BaseActivity {
     };
 
     private void setBalance() {
-        tvBalance.setText(homeDataBean.getBalance());
-        tvMonthSharing.setText(homeDataBean.getMonthlySharing());
+        tvBalance.setText((int) (Double.parseDouble(homeDataBean.getBalance())) + "");
+        tvMonthSharing.setText((int) (Double.parseDouble(homeDataBean.getMonthlySharing())) + "");
         tvMonthTimes.setText(homeDataBean.getSpareTime());
     }
 
